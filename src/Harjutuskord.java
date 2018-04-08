@@ -8,21 +8,24 @@ public class Harjutuskord {
     private int lahendatudYlesandeid; //lahendamise lõpetamise hetkeks tekkinud ülesannete hulk, millele kasutaja on vastuse sisestanud
     private int lahendamiseAeg; //lahendamisele kulunud aeg sekundites
     private int oigeidVastuseid; //õigete vastuste koguhulk ühes harjutuskorras
+    private int raskusAste;//täisarv, mille piires võivad olla ülesannete vastused
 
     //konstruktorid
 
     //aja peale toimuva harjutuskorra loomine
-    public Harjutuskord(boolean kasAjaPeale, int ajalimiit, String teheteValik) {
+    public Harjutuskord(boolean kasAjaPeale, int ajalimiit, String teheteValik, int raskusAste) {
         this.kasAjaPeale = kasAjaPeale;
         this.ajalimiit = ajalimiit;
         this.teheteValik = teheteValik;
+        this.raskusAste = raskusAste;
     }
 
     //limiteeritud ülesannete hulgaga harjutuskorra loomine
-    public Harjutuskord(boolean kasAjaPeale, String teheteValik, int ylesanneteLimiit) {
+    public Harjutuskord(boolean kasAjaPeale, String teheteValik, int ylesanneteLimiit, int raskusAste) {
         this.kasAjaPeale = kasAjaPeale;
         this.ylesanneteLimiit = ylesanneteLimiit;
         this.teheteValik = teheteValik;
+        this.raskusAste = raskusAste;
     }
 
     //meetodid
@@ -59,24 +62,38 @@ public class Harjutuskord {
         return ylesanneteLimiit;
     }
 
+    public int getRaskusAste() {
+        return raskusAste;
+    }
+
+    public boolean isKasAjaPeale() {
+        return kasAjaPeale;
+    }
+
+    public String getTeheteValik() {
+        return teheteValik;
+    }
+
     //trüki harjutuskorra tulemused ekraanile
 
     @Override
     public String toString() {
-        if (kasAjaPeale) { return "Harjutuskord{" +
-                ", ajalimiit=" + ajalimiit +
-                ", teheteValik='" + teheteValik + '\'' +
-                ", lahendatudYlesandeid=" + lahendatudYlesandeid +
-                ", lahendamiseAeg=" + lahendamiseAeg +
-                ", oigeidVastuseid=" + oigeidVastuseid +
+        if (kasAjaPeale) { return
+                " Ajalimiit = " + ajalimiit +
+                ", tehete valik = '" + teheteValik + '\'' +
+                ", lahendatud ülesandeid = " + lahendatudYlesandeid +
+                ", lahendamise aeg = " + lahendamiseAeg +
+                ", õigeid vastuseid = " + oigeidVastuseid +
+                ", raskusaste = " + raskusAste +
                 '}';}
                 else {
-                    return "Harjutuskord{" +
-                    ", ylesanneteLimiit=" + ylesanneteLimiit +
-                    ", teheteValik='" + teheteValik + '\'' +
-                    ", lahendatudYlesandeid=" + lahendatudYlesandeid +
-                    ", lahendamiseAeg=" + lahendamiseAeg +
-                    ", oigeidVastuseid=" + oigeidVastuseid +
+                    return
+                    "Ülesannete limiit=" + ylesanneteLimiit +
+                    ", tehete valik = '" + teheteValik + '\'' +
+                    ", lahendatud ülesandeid = " + lahendatudYlesandeid +
+                    ", lahendamise aeg = " + lahendamiseAeg +
+                    ", õigeid vastuseid = " + oigeidVastuseid +
+                            ", raskusaste = " + raskusAste +
                     '}';
 
         }
