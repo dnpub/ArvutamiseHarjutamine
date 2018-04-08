@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+//testklass
 public class testArvutamine {
 
     static String getTehe(List<String> tehted) {
