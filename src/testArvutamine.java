@@ -5,13 +5,9 @@ import java.util.List;
 //testklass
 public class testArvutamine {
 
-    static String getTehe(List<String> tehted) {
-        int a = 0;
-        a = (int) Math.round(Math.random() * 3 + 0);
-        String valitudTehe = tehted.get(a);
-        return valitudTehe;
-    }
 
+
+    //peameetod
     public static void main(String[] args) {
 
         List<String> võimalikudTehted = Arrays.asList("+", "-", "*", "/");
@@ -49,6 +45,33 @@ public class testArvutamine {
 
 
     }
+
+    //meetodid
+
+    //valitud tehete hulgast juhuslikult ühe tehte valimine
+    static String getTehe(List<String> tehted) {
+        int a = 0;
+        a = (int) Math.round(Math.random() * 3 + 0);
+        String valitudTehe = tehted.get(a);
+        return valitudTehe;
+    }
+
+    //kasutajalt nime küsimine
+
+    //kasutajalt limiidi tüübi küsimine
+
+    //kasutajalt limiidi väärtuse küsimine
+
+    //ajalimiidiga harjutuskorra loomine
+
+    //ülesannete limiidiga harjutuskorra loomine
+
+    //ülesande tekitamine
+
+    //ülesande esitamine kasutajale ja kasutaja vastuse registreerimine
+    // esimese ülesande esitamisega koos tuleb ka stopper käima panna
+    //ajalimiidiga harjutuskorra puhul tuleks näidata ka allesjäänud aega, teatud regulaarsusega
+    // ülesannete limiidi korral viimase ülesande lahendamisega koos tuleb ka stopper seisma panna või siis ajalimiidi korral tule
 
 
 }
