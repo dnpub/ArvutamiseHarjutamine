@@ -354,7 +354,14 @@
       <option name="project" value="LOCAL" />
       <updated>1523531936137</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Lisasin faili kirjutamise mustandi. Hetkel veel ei oska kirjutada mitut rida nii, et varem kirjutatud ridu üle ei kirjutataks.">
+      <created>1523531941390</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1523531941390</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
