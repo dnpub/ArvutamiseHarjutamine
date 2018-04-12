@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94208f78-5a5d-4856-bd1b-8ff5dc67b4f4" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/joosepsona.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/out/production/Arvutamine/testArvutamine.class" afterPath="$PROJECT_DIR$/out/production/Arvutamine/testArvutamine.class" />
-      <change beforePath="$PROJECT_DIR$/src/Harjutuskord.java" afterPath="$PROJECT_DIR$/src/Harjutuskord.java" />
-      <change beforePath="$PROJECT_DIR$/src/testArvutamine.java" afterPath="$PROJECT_DIR$/src/testArvutamine.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -351,7 +347,14 @@
       <option name="project" value="LOCAL" />
       <updated>1523201212070</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Lisasin faili kirjutamise mustandi. Hetkel veel ei oska kirjutada mitut rida nii, et varem kirjutatud ridu üle ei kirjutataks.">
+      <created>1523531936137</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1523531936137</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -393,7 +396,8 @@
     <MESSAGE value="Alo testib, kas push õnnestub" />
     <MESSAGE value="Harjutuskord Kasutaja Stopper mustandid lisatud" />
     <MESSAGE value="Lisasin kasutajal küsimised" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lisasin kasutajal küsimised" />
+    <MESSAGE value="Lisasin faili kirjutamise mustandi. Hetkel veel ei oska kirjutada mitut rida nii, et varem kirjutatud ridu üle ei kirjutataks." />
+    <option name="LAST_COMMIT_MESSAGE" value="Lisasin faili kirjutamise mustandi. Hetkel veel ei oska kirjutada mitut rida nii, et varem kirjutatud ridu üle ei kirjutataks." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
