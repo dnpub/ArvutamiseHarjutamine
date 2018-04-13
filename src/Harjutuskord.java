@@ -1,19 +1,26 @@
+import java.util.Arrays;
+import java.util.List;
+
 public class Harjutuskord {
 
     //isendiväljad
     private boolean kasAjaPeale; //true = ühe harjutuskorra aeg on piiratud, false = ühe harjutuskorra ülesannete hulk on piiratud
     private int ajalimiit; //ajalimiit peab olema sisestatud täisarv ja minutites
     private int ylesanneteLimiit; //ylesannete limiit peab olema täisarv ja väljendab ühe harjutuskorra jaoks kasutaja poolt soovitud ülesannete hulka
-    private String teheteValik; //tehete valimiseks peab sisestama soovitud tehete märgid (+-*/) üksteisest kõrvale
+   // private String teheteValik; //tehete valimiseks peab sisestama soovitud tehete märgid (+-*/) üksteisest kõrvale
     private int lahendatudYlesandeid; //lahendamise lõpetamise hetkeks tekkinud ülesannete hulk, millele kasutaja on vastuse sisestanud
     private int lahendamiseAeg; //lahendamisele kulunud aeg sekundites
     private int oigeidVastuseid; //õigete vastuste koguhulk ühes harjutuskorras
     private int raskusAste;//täisarv, mille piires võivad olla ülesannete vastused
-
+    private List<String> teheteValik;
     //konstruktorid
 
     //aja peale toimuva harjutuskorra loomine
-    public Harjutuskord(boolean kasAjaPeale, int ajalimiit, String teheteValik, int raskusAste) {
+
+
+
+
+    public Harjutuskord(boolean kasAjaPeale, int ajalimiit, List<String> teheteValik, int raskusAste) {
         this.kasAjaPeale = kasAjaPeale;
         this.ajalimiit = ajalimiit;
         this.teheteValik = teheteValik;
@@ -21,7 +28,7 @@ public class Harjutuskord {
     }
 
     //limiteeritud ülesannete hulgaga harjutuskorra loomine
-    public Harjutuskord(boolean kasAjaPeale, String teheteValik, int ylesanneteLimiit, int raskusAste) {
+    public Harjutuskord(boolean kasAjaPeale, List<String> teheteValik, int ylesanneteLimiit, int raskusAste) {
         this.kasAjaPeale = kasAjaPeale;
         this.ylesanneteLimiit = ylesanneteLimiit;
         this.teheteValik = teheteValik;
@@ -70,8 +77,29 @@ public class Harjutuskord {
         return kasAjaPeale;
     }
 
-    public String getTeheteValik() {
+    public List<String> getTeheteValik() {
         return teheteValik;
+    }
+
+    public Ülesanne genereeriÜlesanne( List<String> tehted, int raskusaste){
+        List<String> võimalikudTehted = tehted;
+        Ülesanne ül = null;
+        String tehe = testArvutamine.getTehe(võimalikudTehted);
+        switch (tehe) {
+            case "+":
+                ül = new Liitmine(raskusaste);
+                break;
+            case "-":
+                ül =new Lahutamine(raskusaste);
+                break;
+            case "*":
+                ül=new Korrutamine(raskusaste);
+                break;
+            case "/":
+                ül=new Jagamine(raskusaste);
+                break;
+        }
+        return ül;
     }
 
     //trüki harjutuskorra tulemused ekraanile
@@ -79,7 +107,7 @@ public class Harjutuskord {
     @Override
     public String toString() {
         if (kasAjaPeale) { return
-                " Ajalimiit = " + ajalimiit +
+                " Ajalimiit = " + ajalimiit +" min" +
                 ", tehete valik = '" + teheteValik + '\'' +
                 ", lahendatud ülesandeid = " + lahendatudYlesandeid +
                 ", lahendamise aeg = " + lahendamiseAeg +

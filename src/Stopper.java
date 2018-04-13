@@ -1,14 +1,17 @@
 public class Stopper {
 
     //isendiväljad
-    private long algusAeg = 0;
-    private long loppAeg = 0;
+    private Long algusAeg = System.currentTimeMillis();
+    private Long loppAeg = null;
     private boolean aegJookseb = false;
 
     //konstruktorid
     public void Stopper () {
-        this.algusAeg = System.currentTimeMillis();
+        //this.algusAeg = System.currentTimeMillis();
         this.aegJookseb = true;
+    }
+    public long annaAlgusAeg(){
+        return algusAeg;
     }
 
 
@@ -27,6 +30,7 @@ public class Stopper {
         if (aegJookseb) {
             kulunudAeg = (System.currentTimeMillis() - algusAeg);
         } else {
+            aegSeisma();
             kulunudAeg = (loppAeg - algusAeg);
         }
         return kulunudAeg;
