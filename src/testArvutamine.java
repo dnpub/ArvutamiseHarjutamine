@@ -1,9 +1,18 @@
 /*
 Tegemata asjad:
 1) Küsimise meetoditele: tsüklid, kui sisestatud väärtus ei vasta reeglitele, siis teavitada ja küsida uuesti
-2) Programmist väljumise meetod, mis töötaks nii harjutuskorra lähteandmete etapis kui ka siis, kui ülesannete lahendamine juba käib
+2) Programmist väljumise meetod, mis töötaks nii harjutuskorra lähteandmete etapis kui ka siis, kui ülesannete lahendamine juba käib.
+Mingi Listener klaviatuuri kombinatsioonide jaoks?
+3) Harjutuskorra tulemuste faili kirjutamine
+4) Liiga lihtsate tehete ja väikeste tegurite vältimine
  */
 
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 import java.util.*;
 
 //testklass
@@ -74,7 +83,10 @@ public class testArvutamine {
         System.out.println(s1.getSessiooniID());*/
         System.out.println(s1.toString());
 
-
+        Harjutuskord h1 = new Harjutuskord(false, "/",30, 70);
+        h1.kirjutaHarjutuskordFaili();
+        Harjutuskord h2 = new Harjutuskord(true, 15,"*",21);
+        h1.kirjutaHarjutuskordFaili();
     }
 
     //meetodid

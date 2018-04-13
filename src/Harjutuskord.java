@@ -73,7 +73,7 @@ public class Harjutuskord {
         return raskusAste;
     }
 
-    public boolean isKasAjaPeale() {
+    public boolean kasAjaPeale() {
         return kasAjaPeale;
     }
 
@@ -112,8 +112,7 @@ public class Harjutuskord {
                 ", lahendatud ülesandeid = " + lahendatudYlesandeid +
                 ", lahendamise aeg = " + lahendamiseAeg +
                 ", õigeid vastuseid = " + oigeidVastuseid +
-                ", raskusaste = " + raskusAste +
-                '}';}
+                ", raskusaste = " + raskusAste ;}
                 else {
                     return
                     "Ülesannete limiit=" + ylesanneteLimiit +
@@ -121,9 +120,38 @@ public class Harjutuskord {
                     ", lahendatud ülesandeid = " + lahendatudYlesandeid +
                     ", lahendamise aeg = " + lahendamiseAeg +
                     ", õigeid vastuseid = " + oigeidVastuseid +
-                            ", raskusaste = " + raskusAste +
-                    '}';
+                            ", raskusaste = " + raskusAste ; }
 
         }
+
+    //kirjuta harjutuskorra andmed faili koos kasutaja andmete ja ajaga
+    public void kirjutaHarjutuskordFaili () throws FileNotFoundException, UnsupportedEncodingException {
+
+        //luuakse faili isend
+        String failinimi = "harjutuskorrad.txt";
+        java.io.File fail = new java.io.File(failinimi);
+
+        //kontrollitakse, kas fail on failisüsteemis olemas ja kui ei ole, siis hoiatatakse kasutajat
+        if (!fail.exists())
+            System.out.println("Faili " + failinimi + " ei ole programmi failiga samas kaustas olemas ja seetõttu ei saa harjutuskorra tulemusi salvestada." );
+
+        //luuakse faili kirjutamiseks vajalik klass
+        java.io.PrintWriter pw = new java.io.PrintWriter(fail, "UTF-8");
+
+        //kirjutatakse andmed faili
+        try
+        {
+            FileWriter fw = new FileWriter(failinimi,true); // true tähendab, et andmeid lisatakse faili juurde
+            fw.write(this.toString() + "\n");//appends the string to the file
+            fw.close();
+        }
+        catch(IOException ioe)
+        {
+            System.err.println("IOException: " + ioe.getMessage());// kui tekib, viga siis näidatakse kasutajale veateadet
+        }
+
+
     }
+
+
 }
