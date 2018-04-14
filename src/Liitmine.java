@@ -16,7 +16,7 @@ public class Liitmine extends Ülesanne {
 
     @Override
     String getÜlesanne() {
-        return a + " " + tehe + " " + b + " = " + LiitmiseVastus;
+        return a + " " + tehe + " " + b + " = ?";
     }
 
     @Override

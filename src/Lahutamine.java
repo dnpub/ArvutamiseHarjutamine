@@ -20,7 +20,7 @@ public class Lahutamine extends Ülesanne {
 
     @Override
     String getÜlesanne() {
-        return a + " " + tehe + " " + b + " = " + LahutamiseVastus;
+        return a + " " + tehe + " " + b + " = ?";
     }
 
     @Override

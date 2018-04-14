@@ -1,18 +1,21 @@
 public class Stopper {
 
     //isendiväljad
-    private long algusAeg = 0;
-    private long loppAeg = 0;
-    private boolean aegJookseb = false;
+    private Long algusAeg = System.currentTimeMillis();
+    private Long loppAeg = null;
+    private boolean aegJookseb;
 
     //konstruktorid
-    public void Stopper () {
-        this.algusAeg = System.currentTimeMillis();
+    public Stopper () {
+        //this.algusAeg = System.currentTimeMillis();
         this.aegJookseb = true;
     }
 
-
     //meetodid
+    public long annaAlgusAeg(){
+        return algusAeg;
+    }
+
 
     //pane stopper seisma
     public void aegSeisma() {
@@ -27,6 +30,7 @@ public class Stopper {
         if (aegJookseb) {
             kulunudAeg = (System.currentTimeMillis() - algusAeg);
         } else {
+            aegSeisma();
             kulunudAeg = (loppAeg - algusAeg);
         }
         return kulunudAeg;
@@ -48,5 +52,14 @@ public class Stopper {
             allesJaanudAeg = 0;
         }
         return allesJaanudAeg;
+    }
+
+    //kas aja limiit on läbi või mitte
+    public boolean kasAegLabi (int ajalimiit){
+        if (annaAllesjaanudAegSekundites(ajalimiit) <= 0){
+            return true;
+        } else{
+            return false;
+        }
     }
 }
