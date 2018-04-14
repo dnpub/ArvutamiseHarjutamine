@@ -24,7 +24,7 @@ public class Korrutamine extends Ülesanne {
 
     @Override
     String getÜlesanne() {
-        return a + " " + tehe + " " + b + " = " + KorrutamimiseVastus;
+        return a + " " + tehe + " " + b + " = ?";
     }
 
 

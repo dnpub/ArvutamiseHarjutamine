@@ -23,7 +23,7 @@ public class Jagamine extends Ülesanne {
 
     @Override
     String getÜlesanne() {
-        return a + " " + tehe + " " + b + " = " + JagamiseVastus;
+        return a + " " + tehe + " " + b + " = ?";
     }
 
     @Override
