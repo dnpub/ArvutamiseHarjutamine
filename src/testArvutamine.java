@@ -115,23 +115,29 @@ public class testArvutamine {
     static public boolean kasAjaPeale() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Kas soovid piirata harjutamise aja (1) või ülesannete arvu (2)? Sisesta 1 või 2: ");
-
+        Integer limiidiTyyp= null;
+        boolean test = true;
         boolean tagasta = false;
-        while (true) {
-            int limiidiTyyp = scan.nextInt();
+        while (test) {
+
+            try{
+            limiidiTyyp = Integer.parseInt(scan.nextLine());
             //scan.close();
             if (limiidiTyyp == 1) {
                 //return true;
 
                 tagasta = true;
-                break;
+                test=false;
             } else if (limiidiTyyp == 2) {
                 tagasta = false;
-                break;
+                test=false;
                 //return false;
             } else {
                 // System.out.println("Sisestatud väärtus ei olnud 1 või 2. Eeldame, et ei soovita lahendada aja peale.");
                 //return false;
+                System.out.println("Sisestatud väärtus ei olnud 1 või 2. Palun sisesta uuesti.");
+            }}
+            catch (NumberFormatException e){
                 System.out.println("Sisestatud väärtus ei olnud 1 või 2. Palun sisesta uuesti.");
             }
         }
@@ -217,11 +223,13 @@ public class testArvutamine {
         Scanner scan = new Scanner(System.in);
         Integer raskusaste = null;
         while (true){
-            System.out.println("Sisesta raskusaste (täisarv): ");
+            System.out.println("Sisesta raskusaste (täisarv >=10): ");
         try {
             raskusaste = Integer.parseInt(scan.nextLine());
+            if(raskusaste>=10){
             //System.out.println("Oli täisarv");
-            break;
+            break;}
+
         } catch (NumberFormatException e) {
             System.out.println("Ei olnud täisarv!");
         } }

@@ -133,22 +133,31 @@ public class Sessioon {
 
     public boolean kasAlustame() { // praegu kui pole 1, 2 - aga on arv, siis returnitakse false
         Scanner scan = new Scanner(System.in);
-        while (true) {
-            Integer vastus = null;
+        boolean tagasta = false;
+        boolean test= true;
+        while (test) {
+            String vastus = null;
             System.out.println("Kas alustame jah (1) või ei (2)? Sisesta 1 või 2");
+            vastus = scan.nextLine();
             try {
-                vastus = scan.nextInt();
-                if (vastus == 1) {
-                    return true;
-                } else if (vastus == 2) {
-                    return false;
+
+                if (Integer.parseInt(vastus)== 1) {
+                    tagasta = true;
+                    test =false;
+                } else if (Integer.parseInt(vastus)== 2) {
+                    tagasta= false;
+                    test= false;
                 }
-                return false;
+                else{
+                    System.out.println("Pole sobib arv");
+                }
+
             } catch (NumberFormatException e) { // ideaalis peaks enda exceptioni looma, et iga vastus mis pole 1 või 2 catchitaks
-                System.out.println("Pole sobiv arv!");
+                System.out.println("Pole arv!");
             }
 
         }
+        return tagasta;
     }
 
     public int kysiVastus(){
