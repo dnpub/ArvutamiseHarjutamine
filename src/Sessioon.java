@@ -30,15 +30,12 @@ public class Sessioon {
             Date kellaaeg = new Date();
             boolean k = testArvutamine.kasAjaPeale();
             Harjutuskord h1 = null;
-
-
             // võib-olla oleks lihtsam teha üks konstruktor harjutuskorrale ( if kasAjapeale -> limiidiväärtuse sisu), siis ei peaks lahknemist siin tegema?
             if (k == false) {
                 h1 = new Harjutuskord(k, testArvutamine.kysiTeheteValik(), testArvutamine.kysiLimiidiVaartus(k), testArvutamine.kysiRaskusaste()); //peaks lisama selle, et 0 ei ole OK ülesannete arv, mida sisestada
             } else {
                 h1 = new Harjutuskord(k, testArvutamine.kysiLimiidiVaartus(k), testArvutamine.kysiTeheteValik(), testArvutamine.kysiRaskusaste());
             }
-
             boolean vastus = kasAlustame();
             Stopper stopper1 = new Stopper();//siin fikseeritakse harjutuste tegemise alguse aeg ehk pannakse stopper käima
             if (vastus) {
@@ -50,9 +47,9 @@ public class Sessioon {
                     System.out.println(ülesanne.toString());
 
                     //kasutajalt vastuse küsimine, selle õigsuse hindamine ja sellele vastavalt statistika uuendamine.
-                    if (kasVastusOige(kysiVastus(),Integer.parseInt(ülesanne.getVastus()))) {
+                    if (kasVastusOige(kysiVastus(), Integer.parseInt(ülesanne.getVastus()))) {
                         System.out.println("Tubli! Õige vastus!");
-                        h1.setOigeidVastuseid(h1.getOigeidVastuseid()+1);//suurendamine õigete vastuste hulka harjutuskorras
+                        h1.setOigeidVastuseid(h1.getOigeidVastuseid() + 1);//suurendamine õigete vastuste hulka harjutuskorras
                     } else {
                         System.out.println("Vale vastus! Õige vastus on: " + ülesanne.getVastus());
                     }
@@ -67,10 +64,10 @@ public class Sessioon {
                     //System.out.println("Järgmine ülesanne tekitatakse? " + tingimus);
 
                     //vastusega ülesannete arvu suurendamine
-                    h1.setLahendatudYlesandeid(h1.getLahendatudYlesandeid()+1);
+                    h1.setLahendatudYlesandeid(h1.getLahendatudYlesandeid() + 1);
 
                     //lahendamisele seni kulunud aja muutmine
-                    h1.setLahendamiseAeg((int)stopper1.annaKulunudAegSekundites());
+                    h1.setLahendamiseAeg((int) stopper1.annaKulunudAegSekundites());
                     System.out.println();
 
                     //ülesannete tekitamise jätkamise otsustamine
@@ -83,7 +80,7 @@ public class Sessioon {
                         }
                     } else { //aja limiidiga ülesannete korral tuleb kontrollida allesjäänud aega ning otsustada jätkamine selle alusel
 
-                        if (stopper1.kasAegLabi(h1.getAjalimiit())){
+                        if (stopper1.kasAegLabi(h1.getAjalimiit())) {
                             stopper1.aegSeisma();
                             tingimus = false; //kui aeg on läbi, siis rohkem ülesandeid ei tekitata
                         } else {
@@ -131,28 +128,27 @@ public class Sessioon {
     }
 
 
-    public boolean kasAlustame() { // praegu kui pole 1, 2 - aga on arv, siis returnitakse false
+    public boolean kasAlustame() { //
         Scanner scan = new Scanner(System.in);
-        boolean tagasta = false;
-        boolean test= true;
+        boolean tagasta = false; // kasAlustame? vastus
+        boolean test = true; // testime, kas kasutaja on õigesti vastanud, kui ei ole, küsime sisestust uuesti
         while (test) {
             String vastus = null;
             System.out.println("Kas alustame jah (1) või ei (2)? Sisesta 1 või 2");
             vastus = scan.nextLine();
             try {
-
-                if (Integer.parseInt(vastus)== 1) {
-                    tagasta = true;
-                    test =false;
-                } else if (Integer.parseInt(vastus)== 2) {
-                    tagasta= false;
-                    test= false;
+                if(vastus.equals("x")){System.exit(0);}
+                if (Integer.parseInt(vastus) == 1) {
+                    tagasta = true; // saime vastuse
+                    test = false; // lõpetame küsimise
+                } else if (Integer.parseInt(vastus) == 2) {
+                    tagasta = false; // saime vastuse
+                    test = false;// lõpetame küsimise
+                } else {
+                    System.out.println("Pole sobib arv"); // saime int vastuse, aga see pole 1 ega 2, küsime uuesti
                 }
-                else{
-                    System.out.println("Pole sobib arv");
-                }
 
-            } catch (NumberFormatException e) { // ideaalis peaks enda exceptioni looma, et iga vastus mis pole 1 või 2 catchitaks
+            } catch (NumberFormatException e) { // saime vastuseks midagi, mis pole int;
                 System.out.println("Pole arv!");
             }
 
@@ -160,22 +156,26 @@ public class Sessioon {
         return tagasta;
     }
 
-    public int kysiVastus(){
+    public int kysiVastus() {
         Scanner scan = new Scanner(System.in);
         Integer vastus = null;
-        while (true){
+        while (true) { // küsime kuni saame sobival kujul vastuse;
             System.out.println("Sisesta vastus (täisarv): ");
+            String s;
             try {
-                vastus = Integer.parseInt(scan.nextLine());
+                s=scan.nextLine();
+                if(s.equals("x")){System.exit(0);}
+                vastus = Integer.parseInt(scan.nextLine()); // kas vastus on int ?
                 //System.out.println("Oli täisarv");
                 break;
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException e) { // vastus polnud int
                 System.out.println("Ei olnud täisarv!");
-            } }
+            }
+        }
         return vastus;
     }
 
-    public boolean kasVastusOige (int kasutajaVastus, int oigeVastus){
+    public boolean kasVastusOige(int kasutajaVastus, int oigeVastus) {
         if (kasutajaVastus == oigeVastus) {
             return true;
         } else return false;

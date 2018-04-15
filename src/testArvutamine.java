@@ -1,14 +1,18 @@
 /*
 Tegemata asjad:
-1) Küsimise meetoditele: tsüklid, kui sisestatud väärtus ei vasta reeglitele, siis teavitada ja küsida uuesti
-2) Programmist väljumise meetod, mis töötaks nii harjutuskorra lähteandmete etapis kui ka siis, kui ülesannete lahendamine juba käib.
+
+1) Harjutuskorra tulemuste faili kirjutamine
+2) Liiga lihtsate tehete ja väikeste tegurite vältimine
+3) dokumentatsioonifail.txt
+4) koodi grupeerimine - sh õiged meetodid õigetesse klassidesse tõsta
+5) sessiooni jooksul mitme harjututskorra lubamine
+Testida:
+ *Küsimise meetoditele: tsüklid, kui sisestatud väärtus ei vasta reeglitele, siis teavitada ja küsida uuesti
+ *System.exit(0) testida, tehtud:  Programmist väljumise meetod, mis töötaks nii harjutuskorra lähteandmete etapis kui ka siis, kui ülesannete lahendamine juba käib.
 Mingi Listener klaviatuuri kombinatsioonide jaoks?
-3) Harjutuskorra tulemuste faili kirjutamine
-4) Liiga lihtsate tehete ja väikeste tegurite vältimine
  */
 
-import java.io.FileNotFoundException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,72 +25,32 @@ public class testArvutamine {
 
     //peameetod
     public static void main(String[] args) throws Exception {
-/*
-        List<String> võimalikudTehted = Arrays.asList("+", "-", "*", "/");
+        System.out.println("Programm Arvutamine");
+        System.out.println("Dokumentatsiooni lugemiseks vajuta (1):");
+        System.out.println();
+        System.out.println("---------------------------------------------------");
+        Scanner scan = new Scanner(System.in);
 
-        int ülempiir = 100;
+        try{
 
-        int i = 0;
-        List<Ülesanne> esitatudÜlesanded = new ArrayList<>();
-        while (i < 100) {
-            String tehe = getTehe(võimalikudTehted);
-            switch (tehe) {
-                case "+":
-                    Ülesanne ül1 = new Liitmine(ülempiir);
-                    esitatudÜlesanded.add(ül1);
-                    i++;
-                    break;
-                case "-":
-                    Ülesanne ül2 = new Lahutamine(ülempiir);
-                    esitatudÜlesanded.add(ül2);
-                    i++;
-                    break;
-                case "*":
-                    Ülesanne ül3 = new Korrutamine(ülempiir);
-                    esitatudÜlesanded.add(ül3);
-                    i++;
-                    break;
-                case "/":
-                    Ülesanne ül4 = new Jagamine(ülempiir);
-                    esitatudÜlesanded.add(ül4);
-                    i++;
-                    break;
-            }
-            System.out.println(esitatudÜlesanded.get(esitatudÜlesanded.size() - 1));
-        }*/
-        // String nimi = kysiNimi();
-        //ListkasAjaPeale();
-        //List<String> tehteValik = kysiTeheteValik();
-      /*  Stopper stopper = new Stopper();
-        System.out.println(stopper.annaAlgusAeg());
-        boolean k = kasAjaPeale();
-       Harjutuskord h1 = new Harjutuskord(k, kysiTeheteValik(),kysiLimiidiVaartus(k),100);
-        System.out.println(h1.getTeheteValik());
+        if(Integer.parseInt(scan.nextLine()) == 1){
+            // loe sisse dokumentatsioonifail;
+           File file = new File("harjutuskorrad.txt");
+          BufferedReader reader = new BufferedReader(new FileReader(file));
+           String line;
+           while((line =reader.readLine())!=null){
+               System.out.println(line);
+           }
+            System.out.println("\n---------------------------------------------------");
 
-        System.out.println("Juhuslik tehe:");
-        System.out.println(getTehe(h1.getTeheteValik()));*/
-
-        //kysiTeheteValik();
-        // kysiLimiidiVaartus(true);
-
-      //  System.out.println("Kulunud aeg:");
-        //System.out.println(stopper.annaKulunudAeg());
-        //System.out.println(stopper.annaKulunudAegSekundites());
-
+        }}
+        catch (Exception e){}
+   // scan.close(); ei saa panna siia close - Sessiooni jms alammeetodite scannerid lõpetavad töö
+        System.out.println("Väljumiseks vajuta 'x'.");
+        System.out.println("---------------------------------------------------\n");
        Sessioon s1 = new Sessioon();
-        //System.out.println(h1.getYlesanneteLimiit());
+       System.out.println(s1.toString());
 
-      /*  for (int i = 0; i < s1.getHarjutuskordList().size(); i++) {
-            System.out.println(s1.getHarjutuskordList().get(i));
-
-        }
-        System.out.println(s1.getSessiooniID());*/
-        System.out.println(s1.toString());
-
-        /*Harjutuskord h1 = new Harjutuskord(false, "/",30, 70);
-        h1.kirjutaHarjutuskordFaili();
-        Harjutuskord h2 = new Harjutuskord(true, 15,"*",21);
-        h1.kirjutaHarjutuskordFaili();*/
     }
 
     //meetodid
@@ -105,8 +69,12 @@ public class testArvutamine {
     static public String kysiNimi() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Sisesta oma nimi: ");
-        String nimi = scan.next();
-        //scan.close();
+
+        String s=scan.nextLine();
+        if(s.equals("x")){System.exit(0);}
+        String nimi = s;
+        //scan.close(); ei saa hetkel panna close - muidu ülejäänud kasutatud scannerid eitööta
+
         return nimi;
     }
 
@@ -118,10 +86,12 @@ public class testArvutamine {
         Integer limiidiTyyp= null;
         boolean test = true;
         boolean tagasta = false;
+        String s;
         while (test) {
-
             try{
-            limiidiTyyp = Integer.parseInt(scan.nextLine());
+                s=scan.nextLine();
+                if(s.equals("x")){System.exit(0);}
+            limiidiTyyp = Integer.parseInt(s);
             //scan.close();
             if (limiidiTyyp == 1) {
                 //return true;
@@ -149,6 +119,7 @@ public class testArvutamine {
     static public int kysiLimiidiVaartus(boolean kasAjaPeale) {
         Scanner scan = new Scanner(System.in);
         Integer limiit = null;
+        String s;
         while (true) {
             if (kasAjaPeale) {
                 System.out.println("Sisesta harjutamise aeg minutites (täisarv): ");
@@ -157,7 +128,9 @@ public class testArvutamine {
             }
             //int limiit = scan.nextInt();
             try {
-                limiit = Integer.parseInt(scan.nextLine());
+                s=scan.nextLine();
+                if(s.equals("x")){System.exit(0);}
+                limiit = Integer.parseInt(s);
                 break; // katkestab while loobi
                 //System.out.println("Oli täisarv");
             } catch (NumberFormatException e) {
@@ -177,7 +150,8 @@ public class testArvutamine {
         List<Character> lubatudTehted = Arrays.asList('+', '-', '*', '/');
         while (tehteMargid.isEmpty()) {
             System.out.println("Sisesta tehted, mida soovid harjutada (lubatud märgid: +-*/): ");
-            String tehted = scan.next();
+            String tehted=scan.nextLine();
+            if(tehted.equals("x")){System.exit(0);}
             //scan.close();
             //tükelda sisestatud tähemärkide jada üksikuteks märkideks
 
@@ -222,10 +196,13 @@ public class testArvutamine {
     static int kysiRaskusaste(){
         Scanner scan = new Scanner(System.in);
         Integer raskusaste = null;
+        String s;
         while (true){
             System.out.println("Sisesta raskusaste (täisarv >=10): ");
         try {
-            raskusaste = Integer.parseInt(scan.nextLine());
+            s=scan.nextLine();
+            if(s.equals("x")){System.exit(0);}
+            raskusaste = Integer.parseInt(s);
             if(raskusaste>=10){
             //System.out.println("Oli täisarv");
             break;}
