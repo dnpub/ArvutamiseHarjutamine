@@ -270,7 +270,7 @@ public class Sessioon {
         for (int i = 0; i < harjutuskordList.size(); i++) {
             index = i + 1;
 
-            s += "\n" + getSessiooniID() + ";" + " Harjutuskord = " + index + " ; " + harjustuskorraKellaaeg.get(i) + " ; " + harjutuskordList.get(i);
+            s += "\n" + getSessiooniID() + ";" + " Harjutuskord = " + index + " ; Harjutuskorra algus = " + harjustuskorraKellaaeg.get(i) + " ; " + harjutuskordList.get(i);
         }
         return s;
     }
