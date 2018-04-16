@@ -7,12 +7,13 @@ public class Lahutamine extends Ülesanne {
     public Lahutamine(int ülempiir) {
         super(ülempiir);
 
-        a = (int) Math.round(Math.random() * ülempiir + 0);
-        boolean sobib = false;
+        System.out.println(ülempiir * 0.1);
+        boolean sobib = true;
         while (sobib) {
-            b = (int) Math.round(Math.random() * ülempiir + 0);
+            a = (int) Math.round(Math.random() * (ülempiir - 1) + 1);
+            b = (int) Math.round(Math.random() * (ülempiir - ülempiir * 0.1) + ülempiir * 0.1);
             if (b < a) {
-                sobib = true;
+                sobib = false;
             }
         }
         LahutamiseVastus = a - b;

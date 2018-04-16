@@ -17,11 +17,6 @@ public class Sessioon {
     private String kasutajaNimi = kysiNimi();
 
 
-// millisel kujul kirjutada faili ?
-    // sessiooni id (alustamise kellaaeg + kasutaja) + harjutuskorra jknr + harjutuskorra kellaaeg + harjutuskorrakokkuvõte
-    // võib muuta vastavalt logi -loogikale
-
-
     public Sessioon() throws FileNotFoundException, UnsupportedEncodingException {
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -34,11 +29,6 @@ public class Sessioon {
             Date kellaaeg = new Date();
             boolean k = kasAjaPeale();
             Harjutuskord h1 = new Harjutuskord(k, kysiLimiidiVaartus(k), kysiTeheteValik(), kysiRaskusaste());
-           /* if (k == false) {
-                h1 = new Harjutuskord(k, kysiTeheteValik(), kysiLimiidiVaartus(k), kysiRaskusaste());
-            } else {
-                h1 = new Harjutuskord(k, kysiLimiidiVaartus(k), kysiTeheteValik(), kysiRaskusaste());
-            }*/
 
             if (kasAlustame()) {  // Kasutajalt küsitakse : kas alustame?
                 Stopper stopper1 = new Stopper();//siin fikseeritakse harjutuste tegemise alguse aeg ehk pannakse stopper käima
@@ -62,8 +52,6 @@ public class Sessioon {
                         System.out.println("Lahendamise lõpuni jäänud aeg sekundites: " + stopper1.annaAllesjaanudAegSekundites(h1.getAjalimiit()));
                         System.out.println("Kas etteantud aeg juba läbi: " + stopper1.kasAegLabi(h1.getAjalimiit()));
                     }
-
-                    //System.out.println("Järgmine ülesanne tekitatakse? " + tingimus);
 
                     //vastusega ülesannete arvu suurendamine
                     h1.setLahendatudYlesandeid(h1.getLahendatudYlesandeid() + 1);
@@ -95,7 +83,7 @@ public class Sessioon {
 
 
             // salvestame harjutuskorra statistika
-            harjustuskorraKellaaeg.add(kell.format(kellaaeg).toString());// hetkel lõpuaeg
+            harjustuskorraKellaaeg.add(kell.format(kellaaeg));// hetkel lõpuaeg
             harjutuskordList.add(h1);
 
 
@@ -107,7 +95,6 @@ public class Sessioon {
             System.out.println();
             System.out.println("Uus harjutuskord");
             harjutama = kasAlustame();
-            //scan.close();
         }
         scan.close();
     }
@@ -116,15 +103,12 @@ public class Sessioon {
     //kasutajalt nime küsimine
 
     public String kysiNimi() {
-        // Scanner scan = new Scanner(System.in);
         System.out.println("Sisesta oma nimi: ");
 
-        String s = scan.nextLine();
-        if (s.equals("x")) {
+        String nimi = scan.nextLine();
+        if (nimi.equals("x")) {
             System.exit(0);
         }
-        String nimi = s;
-
 
         return nimi;
     }
@@ -132,7 +116,6 @@ public class Sessioon {
     //kasutajalt limiidi tüübi küsimine
 
     public boolean kasAjaPeale() {
-        // Scanner scan = new Scanner(System.in);
         System.out.println("Kas soovid piirata harjutamise aja (1) või ülesannete arvu (2)? Sisesta 1 või 2: ");
         Integer limiidiTyyp;
         boolean test = true;
@@ -164,7 +147,6 @@ public class Sessioon {
 //kasutajalt limiidi väärtuse küsimine
 
     public int kysiLimiidiVaartus(boolean kasAjaPeale) {
-        //Scanner scan = new Scanner(System.in);
         Integer limiit;
         String s;
         while (true) {
@@ -173,7 +155,7 @@ public class Sessioon {
             } else {
                 System.out.println("Sisesta harjutuskorra ülesannete arv (täisarv): ");
             }
-            //int limiit = scan.nextInt();
+
             try {
                 s = scan.nextLine();
                 if (s.equals("x")) {
@@ -192,9 +174,7 @@ public class Sessioon {
 
 
     //tehetevaliku küsimine
-    public ArrayList<String> kysiTeheteValik() { // eliko: kirjutasin ümber: tehteMärkidesse lisatakse nüüd ainult
-        // kirjed, mis vastavad tingimustele.
-        //Scanner scan = new Scanner(System.in);
+    public ArrayList<String> kysiTeheteValik() {
         StringBuilder sisestatudTehted = new StringBuilder();
         ArrayList<String> tehteMargid = new ArrayList<>();
         List<Character> lubatudTehted = Arrays.asList('+', '-', '*', '/');
@@ -227,7 +207,7 @@ public class Sessioon {
     // raskusastme küsimine
 
     int kysiRaskusaste() {
-        //  Scanner scan = new Scanner(System.in);
+
         Integer raskusaste;
         String s;
         while (true) {
@@ -252,16 +232,10 @@ public class Sessioon {
     }
 
 
-    public List<Harjutuskord> getHarjutuskordList() {
-        return harjutuskordList;
-    }
+
 
     public String getSessiooniID() {
         return sessiooniID;
-    }
-
-    public List<String> getHarjustuskorraKellaaeg() {
-        return harjustuskorraKellaaeg;
     }
 
     public String annaHarjutused() { // harjutuskordade väljaprindiks
@@ -277,7 +251,6 @@ public class Sessioon {
 
 
     public boolean kasAlustame() { //
-        // Scanner scan = new Scanner(System.in);
         boolean tagasta = false; // kasAlustame? vastus
         boolean test = true; // testime, kas kasutaja on õigesti vastanud, kui ei ole, küsime sisestust uuesti
         while (test) {
@@ -307,7 +280,6 @@ public class Sessioon {
     }
 
     public int kysiVastus() {
-        //Scanner scan = new Scanner(System.in);
         Integer vastus;
         while (true) { // küsime kuni saame sobival kujul vastuse;
             System.out.println("Sisesta vastus (täisarv): ");
@@ -318,7 +290,7 @@ public class Sessioon {
                     System.exit(0);
                 }
                 vastus = Integer.parseInt(s); // kas vastus on int ?
-                //System.out.println("Oli täisarv");
+
                 break;
             } catch (NumberFormatException e) { // vastus polnud int
                 System.out.println("Ei olnud täisarv!");
@@ -336,32 +308,22 @@ public class Sessioon {
     @Override
     public String toString() {
         return annaHarjutused();
-        //return "Sessioon: " + getSessiooniID() + " " + annaHarjutused();
+
     }
 
     //kirjuta sessiooni andmed faili koos kasutaja andmete ja ajaga
-    public void kirjutaSessioonFaili () throws FileNotFoundException, UnsupportedEncodingException {
+    public void kirjutaSessioonFaili() throws FileNotFoundException, UnsupportedEncodingException {
 
         //luuakse faili isend
         String failinimi = "harjutuskorrad.txt";
         java.io.File fail = new java.io.File(failinimi);
 
-        //kontrollitakse, kas fail on failisüsteemis olemas ja kui ei ole, siis luuakse. TODO: Vaja testida, kas ikka jääb salvestamata, kui harjutuskordade faili ei ole. Pigem luuakse uus fail
-        if (!fail.exists()) {
-            System.out.println("Faili " + failinimi + " ei ole programmi failiga samas kaustas olemas ja seetõttu ei saa harjutuskorra tulemusi salvestada.");
-            java.io.PrintWriter pw = new java.io.PrintWriter(fail, "UTF-8");
-            pw.close();
-        }
-
         //kirjutatakse andmed faili
-        try
-        {
-            FileWriter fw = new FileWriter(failinimi,true); // true tähendab, et andmeid lisatakse faili juurde, mitte ei kirjutata olemasolevaid üle
+        try {
+            FileWriter fw = new FileWriter(failinimi, true); // true tähendab, et andmeid lisatakse faili juurde, mitte ei kirjutata olemasolevaid üle
             fw.write(this.toString() + "\n");//lisab harjutuskorra kohta andmed stringina faili
             fw.close();
-        }
-        catch(IOException ioe)
-        {
+        } catch (IOException ioe) {
             System.err.println("IOException: " + ioe.getMessage());// kui tekib, viga siis näidatakse kasutajale veateadet
         }
 

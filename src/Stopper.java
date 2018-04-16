@@ -6,13 +6,13 @@ public class Stopper {
     private boolean aegJookseb;
 
     //konstruktorid
-    public Stopper () {
+    public Stopper() {
         //this.algusAeg = System.currentTimeMillis();
         this.aegJookseb = true;
     }
 
     //meetodid
-    public long annaAlgusAeg(){
+    public long annaAlgusAeg() {
         return algusAeg;
     }
 
@@ -39,15 +39,15 @@ public class Stopper {
 
     //leia kulunud aeg sekundites
     public long annaKulunudAegSekundites() {
-        return annaKulunudAeg()/1000;
+        return annaKulunudAeg() / 1000;
     }
 
     //leia harjutuskorras allesjäänud aeg sekundites, ajalimiit tuleb sisse minutites
-    public long annaAllesjaanudAegSekundites (int ajalimiit){
+    public long annaAllesjaanudAegSekundites(int ajalimiit) {
         long allesJaanudAeg;
         if (aegJookseb) {
             allesJaanudAeg = (ajalimiit * 60) - annaKulunudAegSekundites();
-                    //alternatiivne arvutusvariant: ((algusAeg + (ajalimiit * 60 * 1000)) - System.currentTimeMillis());
+            //alternatiivne arvutusvariant: ((algusAeg + (ajalimiit * 60 * 1000)) - System.currentTimeMillis());
         } else {
             allesJaanudAeg = 0;
         }
@@ -55,10 +55,10 @@ public class Stopper {
     }
 
     //kas aja limiit on läbi või mitte
-    public boolean kasAegLabi (int ajalimiit){
-        if (annaAllesjaanudAegSekundites(ajalimiit) <= 0){
+    public boolean kasAegLabi(int ajalimiit) {
+        if (annaAllesjaanudAegSekundites(ajalimiit) <= 0) {
             return true;
-        } else{
+        } else {
             return false;
         }
     }

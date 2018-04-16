@@ -20,8 +20,6 @@ import java.util.*;
 
 //testklass
 public class testArvutamine {
-    // public static final Scanner scan = new Scanner(System.in);
-
     //peameetod
     public static void main(String[] args) throws Exception {
 

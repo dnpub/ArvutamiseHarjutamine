@@ -8,29 +8,20 @@ public class Jagamine extends Ülesanne {
     private int JagamiseVastus;
 
     public Jagamine(int ülempiir) {
-
         super(ülempiir);
-        int i =0;
-        while (i < getÜlempiir()) {
-
-            Random random = new Random();
-            boolean k = true;
-            while (k) {
-                JagamiseVastus = (int) Math.round(random.nextGaussian() * 50 + 0.3 * ülempiir);
-                b = (int) Math.round(Math.random() * (ülempiir*0.5) + 2);
-                // b = (int) Math.round(random.nextGaussian() * 35 + 0.5 * ülempiir);
-
-                a = b * JagamiseVastus;
-
-                if (a < ülempiir && JagamiseVastus > 0 && a != b) {
-
-                    i++;
-                    k = false;
-                }
+        Random random = new Random();
+        boolean k = true;
+        while (k) {
+            JagamiseVastus = (int) Math.round(random.nextGaussian() * 50 + 0.3 * ülempiir);
+            b = (int) Math.round(Math.random() * (ülempiir * 0.5) + 2);
+            // b = (int) Math.round(random.nextGaussian() * 35 + 0.5 * ülempiir);
+            a = b * JagamiseVastus;
+            if (a < ülempiir && JagamiseVastus > 0 && a != b) {
+                k = false;
             }
         }
 
-        }
+    }
 
     @Override
     String getÜlesanne() {

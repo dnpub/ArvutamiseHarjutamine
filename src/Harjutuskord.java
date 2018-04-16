@@ -9,10 +9,9 @@ public class Harjutuskord {
 
     //isendiväljad
     private boolean kasAjaPeale; //true = ühe harjutuskorra aeg on piiratud, false = ühe harjutuskorra ülesannete hulk on piiratud
-   // private int ajalimiit; //ajalimiit peab olema sisestatud täisarv ja minutites
+
     private int limiit; // aja või ülesannete arvu limiit: ajalimiit peab olema sisestatud täisarv ja minutites;
     //ylesannete limiit peab olema täisarv ja väljendab ühe harjutuskorra jaoks kasutaja poolt soovitud ülesannete hulka
-    //private int ylesanneteLimiit; //ylesannete limiit peab olema täisarv ja väljendab ühe harjutuskorra jaoks kasutaja poolt soovitud ülesannete hulka
     private int lahendatudYlesandeid; //lahendamise lõpetamise hetkeks tekkinud ülesannete hulk, millele kasutaja on vastuse sisestanud
     private int lahendamiseAeg; //lahendamisele kulunud aeg sekundites
     private int oigeidVastuseid; //õigete vastuste koguhulk ühes harjutuskorras
@@ -29,14 +28,6 @@ public class Harjutuskord {
         this.raskusAste = raskusAste;
     }
 
-    /*//limiteeritud ülesannete hulgaga harjutuskorra loomine
-    public Harjutuskord(boolean kasAjaPeale, List<String> teheteValik, int ylesanneteLimiit, int raskusAste) {
-        this.kasAjaPeale = kasAjaPeale;
-        this.ylesanneteLimiit = ylesanneteLimiit;
-        this.teheteValik = teheteValik;
-        this.raskusAste = raskusAste;
-    }*/
-
     //meetodid
 
     public int getLahendatudYlesandeid() {
@@ -45,10 +36,6 @@ public class Harjutuskord {
 
     public void setLahendatudYlesandeid(int lahendatudYlesandeid) {
         this.lahendatudYlesandeid = lahendatudYlesandeid;
-    }
-
-    public int getLahendamiseAeg() {
-        return lahendamiseAeg;
     }
 
     public void setLahendamiseAeg(int lahendamiseAeg) {
@@ -69,7 +56,7 @@ public class Harjutuskord {
     }
 
     public int getYlesanneteLimiit() {
-       // return ylesanneteLimiit;
+        // return ylesanneteLimiit;
         return limiit;
     }
 
@@ -85,7 +72,7 @@ public class Harjutuskord {
         return teheteValik;
     }
 
-    public Ülesanne genereeriÜlesanne( List<String> tehted, int raskusaste){
+    public Ülesanne genereeriÜlesanne(List<String> tehted, int raskusaste) {
         List<String> võimalikudTehted = tehted;
         Ülesanne ül = null;
         String tehe = getTehe(võimalikudTehted);
@@ -94,21 +81,22 @@ public class Harjutuskord {
                 ül = new Liitmine(raskusaste);
                 break;
             case "-":
-                ül =new Lahutamine(raskusaste);
+                ül = new Lahutamine(raskusaste);
                 break;
             case "*":
-                ül=new Korrutamine(raskusaste);
+                ül = new Korrutamine(raskusaste);
                 break;
             case "/":
-                ül=new Jagamine(raskusaste);
+                ül = new Jagamine(raskusaste);
                 break;
         }
         return ül;
     }
+
     //valitud tehete hulgast juhuslikult ühe tehte valimine
     public String getTehe(List<String> tehted) {
         int a = 0;
-        a = (int) Math.round(Math.random() * (tehted.size()-1) + 0); // tehted.size()-1
+        a = (int) Math.round(Math.random() * (tehted.size() - 1) + 0); // tehted.size()-1
         String valitudTehe = tehted.get(a);
         return valitudTehe;
     }
@@ -117,51 +105,24 @@ public class Harjutuskord {
 
     @Override
     public String toString() {
-        if (kasAjaPeale) { return
-                //" Ajalimiit = " + ajalimiit +" min" +
-                        " Ajalimiit(min) = " + limiit +
-                " ; tehete valik = '" + teheteValik + '\'' +
-                " ; lahendatud ülesandeid = " + lahendatudYlesandeid +
-                " ; lahendamise aeg sekundites = " + lahendamiseAeg +
-                " ; õigeid vastuseid = " + oigeidVastuseid +
-                " ; raskusaste = " + raskusAste ;}
-                else {
-                    return
-                    //"Ülesannete limiit=" + ylesanneteLimiit +
-                            " Ülesannete limiit = " + limiit +
-                    " ; tehete valik = '" + teheteValik + '\'' +
-                    " ; lahendatud ülesandeid = " + lahendatudYlesandeid +
-                    " ; lahendamise aeg sekundites = " + lahendamiseAeg +
-                    " ; õigeid vastuseid = " + oigeidVastuseid +
-                            " ; raskusaste = " + raskusAste ; }
-
-        }
-
-    //kirjuta harjutuskorra andmed faili
-    public void kirjutaHarjutuskordFaili () throws FileNotFoundException, UnsupportedEncodingException {
-
-        //luuakse faili isend
-        String failinimi = "harjutuskorrad.txt";
-        java.io.File fail = new java.io.File(failinimi);
-
-        //kontrollitakse, kas fail on failisüsteemis olemas ja kui ei ole, siis luuakse
-        if (!fail.exists()) {
-            System.out.println("Faili " + failinimi + " ei ole programmi failiga samas kaustas olemas ja seetõttu ei saa harjutuskorra tulemusi salvestada.");
-            java.io.PrintWriter pw = new java.io.PrintWriter(fail, "UTF-8");
-            pw.close();
-        }
-
-        //kirjutatakse andmed faili
-        try
-        {
-            FileWriter fw = new FileWriter(failinimi,true); // true tähendab, et andmeid lisatakse faili juurde, mitte ei kirjutata olemasolevaid üle
-            fw.write(this.toString() + "\n");//lisab harjutuskorra kohta andmed stringina faili
-            fw.close();
-        }
-        catch(IOException ioe)
-        {
-            System.err.println("IOException: " + ioe.getMessage());// kui tekib, viga siis näidatakse kasutajale veateadet
+        if (kasAjaPeale) {
+            return
+                    " Ajalimiit(min) = " + limiit +
+                            " ; tehete valik = '" + teheteValik + '\'' +
+                            " ; lahendatud ülesandeid = " + lahendatudYlesandeid +
+                            " ; lahendamise aeg sekundites = " + lahendamiseAeg +
+                            " ; õigeid vastuseid = " + oigeidVastuseid +
+                            " ; raskusaste = " + raskusAste;
+        } else {
+            return
+                    " Ülesannete limiit = " + limiit +
+                            " ; tehete valik = '" + teheteValik + '\'' +
+                            " ; lahendatud ülesandeid = " + lahendatudYlesandeid +
+                            " ; lahendamise aeg sekundites = " + lahendamiseAeg +
+                            " ; õigeid vastuseid = " + oigeidVastuseid +
+                            " ; raskusaste = " + raskusAste;
         }
 
     }
+
 }
