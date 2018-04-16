@@ -9,8 +9,8 @@ public class Liitmine extends Ülesanne {
 
     public Liitmine(int ülempiir) {
         super(ülempiir);
-        a = (int) Math.round(Math.random() * ülempiir + 0);
-        b = (int) Math.round(Math.random() * (ülempiir - a) + 0);
+        a = (int) Math.round(Math.random() * (ülempiir-1) + 1);
+        b = (int) Math.round(Math.random() * (ülempiir - a-1) + 1);
         LiitmiseVastus = a + b;
     }
 
