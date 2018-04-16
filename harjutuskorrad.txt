@@ -1,1 +1,0 @@
-Ülesannete limiit=30, tehete valik = '/', lahendatud ülesandeid = 0, lahendamise aeg = 0, õigeid vastuseid = 0, raskusaste = 70
