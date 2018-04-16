@@ -16,5 +16,3 @@ Kui vastus on vale, näitab programm õiget vastust.
 Õigete, valede vastuste statistika salvestatakse iga harjutuskorra kohta faili "harjutuskorrad.txt".
 Programmi töö lõpetamiseks enne harjutuskorra lõppu, sisestada 'x'.
 Sellisel juhul käimasoleva harjutuskorra tulemusi ei salvestata.
-
-

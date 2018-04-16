@@ -10,7 +10,6 @@ public class Korrutamine extends Ülesanne {
         super(ülempiir);
 
         Random random= new Random();
-
         boolean test = true;
         while (test) {
             //int s = (int) Math.round(Math.random() * (ülempiir / 2) + 0);
@@ -22,8 +21,6 @@ public class Korrutamine extends Ülesanne {
             KorrutamimiseVastus = a * b;
             if (b > ülempiir/3){
             test = false;}*/
-
-
 
             if (ülempiir==10){
                // a = (int) Math.round(random.nextGaussian()*ülempiir*0.5 + 0.6*ülempiir);//

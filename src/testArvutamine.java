@@ -20,54 +20,47 @@ import java.util.*;
 
 //testklass
 public class testArvutamine {
-
+    // public static final Scanner scan = new Scanner(System.in);
 
     //peameetod
     public static void main(String[] args) throws Exception {
 
         System.out.println("Programm Arvutamise harjutamine");
-        System.out.println("Dokumentatsiooni lugemiseks vajuta (1):");
         System.out.println();
-        System.out.println("---------------------------------------------------");
+        System.out.println("Dokumentatsiooni lugemiseks vajuta (1), vahelejätmiseks (2)");
         Scanner scan = new Scanner(System.in);
 
-        try{
+        try {
 
-        if(Integer.parseInt(scan.nextLine()) == 1){
-            // loe sisse dokumentatsioonifail;
-           File file = new File("dokumentatsioon.txt");
-          BufferedReader reader = new BufferedReader(new FileReader(file));
-           String line;
-           while((line =reader.readLine())!=null){
-               System.out.println(line);
-           }
-            System.out.println("\n---------------------------------------------------");
+            if (Integer.parseInt(scan.next()) == 1) {
+                // loe sisse dokumentatsioonifail;
+                File file = new File("dokumentatsioon.txt");
+                BufferedReader reader = new BufferedReader(new FileReader(file));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    System.out.println(line);
+                }
 
-        }}
-        catch (Exception e){}
-   // scan.close(); ei saa panna siia close - Sessiooni jms alammeetodite scannerid lõpetavad töö
-        System.out.println("Programmi katkestamiseks sisesta 'x'.");
-        System.out.println("---------------------------------------------------\n");
-       Sessioon s1 = new Sessioon();
-       System.out.println(s1.toString());
+            }
+
+        } catch (Exception e) {
+        } finally {
+            System.out.println("---------------------------------------------------");
+            System.out.println("Programmi katkestamiseks sisesta 'x'.");
+            System.out.println("---------------------------------------------------\n");
+        }
+
+        Sessioon s1 = new Sessioon();
+        System.out.println(s1.toString());
+
+
+        scan.close();
 
     }
 
     //meetodid
 
-    //valitud tehete hulgast juhuslikult ühe tehte valimine
-    static String getTehe(List<String> tehted) {
-        int a = 0;
-        a = (int) Math.round(Math.random() * (tehted.size()-1) + 0); // tehted.size()-1
-        String valitudTehe = tehted.get(a);
-        return valitudTehe;
-    }
-
-
-
-
-
-
+}
 
     //ajalimiidiga harjutuskorra loomine
 
@@ -81,4 +74,3 @@ public class testArvutamine {
     // ülesannete limiidi korral viimase ülesande lahendamisega koos tuleb ka stopper seisma panna või siis ajalimiidi korral tule
 
 
-}

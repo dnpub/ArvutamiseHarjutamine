@@ -9,9 +9,11 @@ public class Sessioon {
     private DateFormat kell = new SimpleDateFormat("HH:mm:ss");
     private Date date = new Date();
     private String sessiooniID;
-    private String kasutajaNimi = kysiNimi();
     private List<Harjutuskord> harjutuskordList = new ArrayList<>();
     private List<String> harjustuskorraKellaaeg = new ArrayList<>();
+    private static Scanner scan = new Scanner(System.in);
+    private String kasutajaNimi = kysiNimi();
+
 
 // millisel kujul kirjutada faili ?
     // sessiooni id (alustamise kellaaeg + kasutaja) + harjutuskorra jknr + harjutuskorra kellaaeg + harjutuskorrakokkuvõte
@@ -29,22 +31,19 @@ public class Sessioon {
         while (harjutama) {
             Date kellaaeg = new Date();
             boolean k = kasAjaPeale();
-            Harjutuskord h1;
-            h1 = new Harjutuskord(k, kysiLimiidiVaartus(k), kysiTeheteValik(), kysiRaskusaste());
+            Harjutuskord h1 = new Harjutuskord(k, kysiLimiidiVaartus(k), kysiTeheteValik(), kysiRaskusaste());
            /* if (k == false) {
                 h1 = new Harjutuskord(k, kysiTeheteValik(), kysiLimiidiVaartus(k), kysiRaskusaste());
             } else {
                 h1 = new Harjutuskord(k, kysiLimiidiVaartus(k), kysiTeheteValik(), kysiRaskusaste());
             }*/
-            boolean vastus = kasAlustame(); // Kasutajalt küsitakse : kas alustame?
 
-            Stopper stopper1 = new Stopper();//siin fikseeritakse harjutuste tegemise alguse aeg ehk pannakse stopper käima
-            if (vastus) {
-                boolean tingimus = true; // aeg on ok või ülesandeid < kui limiidi väärtus : pole kirjutud
+            if (kasAlustame()) {  // Kasutajalt küsitakse : kas alustame?
+                Stopper stopper1 = new Stopper();//siin fikseeritakse harjutuste tegemise alguse aeg ehk pannakse stopper käima
+                boolean tingimus = true; // aeg on ok või ülesandeid < kui limiidi väärtus
                 int allesJaanudYlesanneteArv = h1.getYlesanneteLimiit();
                 while (tingimus) {
                     Ülesanne ülesanne = h1.genereeriÜlesanne(h1.getTeheteValik(), h1.getRaskusAste());
-                    //System.out.println(h1.getTeheteValik());
                     System.out.println(ülesanne.toString());
 
                     //kasutajalt vastuse küsimine, selle õigsuse hindamine ja sellele vastavalt statistika uuendamine.
@@ -100,16 +99,21 @@ public class Sessioon {
 
             //kirjutame harjutuskorra andmed logifaili
             h1.kirjutaHarjutuskordFaili();
-
-            harjutama = false;
+            System.out.println(h1.toString());
+            System.out.println("---------------------------------------------------");
+            System.out.println();
+            System.out.println("Uus harjutuskord");
+            harjutama = kasAlustame();
+            //scan.close();
         }
+        scan.close();
     }
 
 
     //kasutajalt nime küsimine
 
     public String kysiNimi() {
-        Scanner scan = new Scanner(System.in);
+        // Scanner scan = new Scanner(System.in);
         System.out.println("Sisesta oma nimi: ");
 
         String s = scan.nextLine();
@@ -117,7 +121,7 @@ public class Sessioon {
             System.exit(0);
         }
         String nimi = s;
-        //scan.close(); ei saa hetkel panna close - muidu ülejäänud kasutatud scannerid eitööta
+
 
         return nimi;
     }
@@ -125,9 +129,9 @@ public class Sessioon {
     //kasutajalt limiidi tüübi küsimine
 
     public boolean kasAjaPeale() {
-        Scanner scan = new Scanner(System.in);
+        // Scanner scan = new Scanner(System.in);
         System.out.println("Kas soovid piirata harjutamise aja (1) või ülesannete arvu (2)? Sisesta 1 või 2: ");
-        Integer limiidiTyyp = null;
+        Integer limiidiTyyp;
         boolean test = true;
         boolean tagasta = false;
         String s;
@@ -138,19 +142,14 @@ public class Sessioon {
                     System.exit(0);
                 }
                 limiidiTyyp = Integer.parseInt(s);
-                //scan.close();
                 if (limiidiTyyp == 1) {
-                    //return true;
-
                     tagasta = true;
                     test = false;
                 } else if (limiidiTyyp == 2) {
                     tagasta = false;
                     test = false;
-                    //return false;
+
                 } else {
-                    // System.out.println("Sisestatud väärtus ei olnud 1 või 2. Eeldame, et ei soovita lahendada aja peale.");
-                    //return false;
                     System.out.println("Sisestatud väärtus ei olnud 1 või 2. Palun sisesta uuesti.");
                 }
             } catch (NumberFormatException e) {
@@ -161,9 +160,9 @@ public class Sessioon {
     }
 //kasutajalt limiidi väärtuse küsimine
 
-    static public int kysiLimiidiVaartus(boolean kasAjaPeale) {
-        Scanner scan = new Scanner(System.in);
-        Integer limiit = null;
+    public int kysiLimiidiVaartus(boolean kasAjaPeale) {
+        //Scanner scan = new Scanner(System.in);
+        Integer limiit;
         String s;
         while (true) {
             if (kasAjaPeale) {
@@ -183,16 +182,16 @@ public class Sessioon {
             } catch (NumberFormatException e) {
                 System.out.println("Ei olnud täisarv!");
             }
-            //scan.close();
+
         }
         return limiit;
     }
 
 
     //tehetevaliku küsimine
-    static public ArrayList<String> kysiTeheteValik() { // eliko: kirjutasin ümber: tehteMärkidesse lisatakse nüüd ainult
+    public ArrayList<String> kysiTeheteValik() { // eliko: kirjutasin ümber: tehteMärkidesse lisatakse nüüd ainult
         // kirjed, mis vastavad tingimustele.
-        Scanner scan = new Scanner(System.in);
+        //Scanner scan = new Scanner(System.in);
         StringBuilder sisestatudTehted = new StringBuilder();
         ArrayList<String> tehteMargid = new ArrayList<>();
         List<Character> lubatudTehted = Arrays.asList('+', '-', '*', '/');
@@ -202,7 +201,7 @@ public class Sessioon {
             if (tehted.equals("x")) {
                 System.exit(0);
             }
-            //scan.close();
+
             //tükelda sisestatud tähemärkide jada üksikuteks märkideks
 
             for (int i = 0; i < tehted.length(); i++) { // kui sisestatud märk on  lubatud tehetes, aga pole veel lisatud tehteMärkidesse:
@@ -224,8 +223,8 @@ public class Sessioon {
 
     // raskusastme küsimine
 
-    static int kysiRaskusaste() {
-        Scanner scan = new Scanner(System.in);
+    int kysiRaskusaste() {
+        //  Scanner scan = new Scanner(System.in);
         Integer raskusaste;
         String s;
         while (true) {
@@ -275,7 +274,7 @@ public class Sessioon {
 
 
     public boolean kasAlustame() { //
-        Scanner scan = new Scanner(System.in);
+        // Scanner scan = new Scanner(System.in);
         boolean tagasta = false; // kasAlustame? vastus
         boolean test = true; // testime, kas kasutaja on õigesti vastanud, kui ei ole, küsime sisestust uuesti
         while (test) {
@@ -293,7 +292,7 @@ public class Sessioon {
                     tagasta = false; // saime vastuse
                     test = false;// lõpetame küsimise
                 } else {
-                    System.out.println("Pole sobib arv"); // saime int vastuse, aga see pole 1 ega 2, küsime uuesti
+                    System.out.println("Sisesta uuesti!"); // saime int vastuse, aga see pole 1 ega 2, küsime uuesti
                 }
 
             } catch (NumberFormatException e) { // saime vastuseks midagi, mis pole int;
@@ -305,7 +304,7 @@ public class Sessioon {
     }
 
     public int kysiVastus() {
-        Scanner scan = new Scanner(System.in);
+        //Scanner scan = new Scanner(System.in);
         Integer vastus;
         while (true) { // küsime kuni saame sobival kujul vastuse;
             System.out.println("Sisesta vastus (täisarv): ");

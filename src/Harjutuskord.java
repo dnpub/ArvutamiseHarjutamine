@@ -88,7 +88,7 @@ public class Harjutuskord {
     public Ülesanne genereeriÜlesanne( List<String> tehted, int raskusaste){
         List<String> võimalikudTehted = tehted;
         Ülesanne ül = null;
-        String tehe = testArvutamine.getTehe(võimalikudTehted);
+        String tehe = getTehe(võimalikudTehted);
         switch (tehe) {
             case "+":
                 ül = new Liitmine(raskusaste);
@@ -105,6 +105,13 @@ public class Harjutuskord {
         }
         return ül;
     }
+    //valitud tehete hulgast juhuslikult ühe tehte valimine
+    public String getTehe(List<String> tehted) {
+        int a = 0;
+        a = (int) Math.round(Math.random() * (tehted.size()-1) + 0); // tehted.size()-1
+        String valitudTehe = tehted.get(a);
+        return valitudTehe;
+    }
 
     //trüki harjutuskorra tulemused ekraanile
 
@@ -112,21 +119,21 @@ public class Harjutuskord {
     public String toString() {
         if (kasAjaPeale) { return
                 //" Ajalimiit = " + ajalimiit +" min" +
-                        " Ajalimiit = " + limiit +" min" +
-                ", tehete valik = '" + teheteValik + '\'' +
-                ", lahendatud ülesandeid = " + lahendatudYlesandeid +
-                ", lahendamise aeg sekundites = " + lahendamiseAeg +
-                ", õigeid vastuseid = " + oigeidVastuseid +
-                ", raskusaste = " + raskusAste ;}
+                        " Ajalimiit(min) = " + limiit +
+                "; tehete valik = '" + teheteValik + '\'' +
+                "; lahendatud ülesandeid = " + lahendatudYlesandeid +
+                "; lahendamise aeg sekundites = " + lahendamiseAeg +
+                "; õigeid vastuseid = " + oigeidVastuseid +
+                "; raskusaste = " + raskusAste ;}
                 else {
                     return
                     //"Ülesannete limiit=" + ylesanneteLimiit +
                             "Ülesannete limiit=" + limiit +
-                    ", tehete valik = '" + teheteValik + '\'' +
-                    ", lahendatud ülesandeid = " + lahendatudYlesandeid +
-                    ", lahendamise aeg sekundites = " + lahendamiseAeg +
-                    ", õigeid vastuseid = " + oigeidVastuseid +
-                            ", raskusaste = " + raskusAste ; }
+                    "; tehete valik = '" + teheteValik + '\'' +
+                    "; lahendatud ülesandeid = " + lahendatudYlesandeid +
+                    "; lahendamise aeg sekundites = " + lahendamiseAeg +
+                    "; õigeid vastuseid = " + oigeidVastuseid +
+                            "; raskusaste = " + raskusAste ; }
 
         }
 
