@@ -1,0 +1,20 @@
+Arvutamise harjutamine 
+
+Autorid: Alo Joosepson, Eliko Tõldsepp
+OOP rühmatöö, aprill 2018
+
+Arvutamise harjutamine on programm peast arvutamise harjutamiseks.
+Programm võimaldab harjutada arvutamist täisarvudega.
+Võimalik on valida (1) aeg või (2) ülesannete arv, mis on ühe harjutuskorra piiranguks.
+Programm küsib kasutajalt tehted, mida soovitakse harjutada (+-/*).
+Programm küsib kasutajalt raskusastet (st, arvu, mille piires toimub arvutamine, >=10).
+Programm esitab kasutajale ülesande juhuslikult valitud tehtega sisestatud tehte hulgast.
+Kui kasutaja sisestab ülesande vastuse, kontrollitakse vastus.
+Programm esitab tagasiside vastuse õigsuse ja siiani lahendamiseks kulunud aja kohta.
+Kui vastus on vale, näitab programm õiget vastust.
+Ülesannete esitamine lõppeb, kui kasutaja poolt sisestatud aja või ülesannete arvu limiit on täis.
+Õigete, valede vastuste statistika salvestatakse iga harjutuskorra kohta faili "harjutuskorrad.txt".
+Programmi töö lõpetamiseks enne harjutuskorra lõppu, sisestada 'x'.
+Sellisel juhul käimasoleva harjutuskorra tulemusi ei salvestata.
+
+
