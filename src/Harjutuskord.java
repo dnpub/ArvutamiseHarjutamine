@@ -9,35 +9,33 @@ public class Harjutuskord {
 
     //isendiväljad
     private boolean kasAjaPeale; //true = ühe harjutuskorra aeg on piiratud, false = ühe harjutuskorra ülesannete hulk on piiratud
-    private int ajalimiit; //ajalimiit peab olema sisestatud täisarv ja minutites
-    private int ylesanneteLimiit; //ylesannete limiit peab olema täisarv ja väljendab ühe harjutuskorra jaoks kasutaja poolt soovitud ülesannete hulka
-   // private String teheteValik; //tehete valimiseks peab sisestama soovitud tehete märgid (+-*/) üksteisest kõrvale
+   // private int ajalimiit; //ajalimiit peab olema sisestatud täisarv ja minutites
+    private int limiit; // aja või ülesannete arvu limiit: ajalimiit peab olema sisestatud täisarv ja minutites;
+    //ylesannete limiit peab olema täisarv ja väljendab ühe harjutuskorra jaoks kasutaja poolt soovitud ülesannete hulka
+    //private int ylesanneteLimiit; //ylesannete limiit peab olema täisarv ja väljendab ühe harjutuskorra jaoks kasutaja poolt soovitud ülesannete hulka
     private int lahendatudYlesandeid; //lahendamise lõpetamise hetkeks tekkinud ülesannete hulk, millele kasutaja on vastuse sisestanud
     private int lahendamiseAeg; //lahendamisele kulunud aeg sekundites
     private int oigeidVastuseid; //õigete vastuste koguhulk ühes harjutuskorras
     private int raskusAste;//täisarv, mille piires võivad olla ülesannete vastused
-    private List<String> teheteValik;
+    private List<String> teheteValik; // tehted,millega ülesandeid genereeritakse
     //konstruktorid
 
-    //aja peale toimuva harjutuskorra loomine
+    //harjutuskorra loomine
 
-
-
-
-    public Harjutuskord(boolean kasAjaPeale, int ajalimiit, List<String> teheteValik, int raskusAste) {
+    public Harjutuskord(boolean kasAjaPeale, int limiit, List<String> teheteValik, int raskusAste) {
         this.kasAjaPeale = kasAjaPeale;
-        this.ajalimiit = ajalimiit;//kasutajalt küsitakse lahendamise aeg minutites, kuid arvutused kulunud aja kohta toimuvad sekundites
+        this.limiit = limiit;//kasutajalt küsitakse lahendamise aeg minutites, kuid arvutused kulunud aja kohta toimuvad sekundites
         this.teheteValik = teheteValik;
         this.raskusAste = raskusAste;
     }
 
-    //limiteeritud ülesannete hulgaga harjutuskorra loomine
+    /*//limiteeritud ülesannete hulgaga harjutuskorra loomine
     public Harjutuskord(boolean kasAjaPeale, List<String> teheteValik, int ylesanneteLimiit, int raskusAste) {
         this.kasAjaPeale = kasAjaPeale;
         this.ylesanneteLimiit = ylesanneteLimiit;
         this.teheteValik = teheteValik;
         this.raskusAste = raskusAste;
-    }
+    }*/
 
     //meetodid
 
@@ -66,11 +64,13 @@ public class Harjutuskord {
     }
 
     public int getAjalimiit() {
-        return ajalimiit;
+        //return ajalimiit;
+        return limiit;
     }
 
     public int getYlesanneteLimiit() {
-        return ylesanneteLimiit;
+       // return ylesanneteLimiit;
+        return limiit;
     }
 
     public int getRaskusAste() {
@@ -111,7 +111,8 @@ public class Harjutuskord {
     @Override
     public String toString() {
         if (kasAjaPeale) { return
-                " Ajalimiit = " + ajalimiit +" min" +
+                //" Ajalimiit = " + ajalimiit +" min" +
+                        " Ajalimiit = " + limiit +" min" +
                 ", tehete valik = '" + teheteValik + '\'' +
                 ", lahendatud ülesandeid = " + lahendatudYlesandeid +
                 ", lahendamise aeg sekundites = " + lahendamiseAeg +
@@ -119,7 +120,8 @@ public class Harjutuskord {
                 ", raskusaste = " + raskusAste ;}
                 else {
                     return
-                    "Ülesannete limiit=" + ylesanneteLimiit +
+                    //"Ülesannete limiit=" + ylesanneteLimiit +
+                            "Ülesannete limiit=" + limiit +
                     ", tehete valik = '" + teheteValik + '\'' +
                     ", lahendatud ülesandeid = " + lahendatudYlesandeid +
                     ", lahendamise aeg sekundites = " + lahendamiseAeg +

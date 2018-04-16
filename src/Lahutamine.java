@@ -9,7 +9,7 @@ public class Lahutamine extends Ülesanne {
 
         a = (int) Math.round(Math.random() * ülempiir + 0);
         boolean sobib = false;
-        while (sobib == false) {
+        while (sobib) {
             b = (int) Math.round(Math.random() * ülempiir + 0);
             if (b < a) {
                 sobib = true;

@@ -4,18 +4,9 @@ import java.util.List;
 
 abstract class Ülesanne {
     private int ülempiir;
-   //private String tehe;
-   /* private int a;
-    private int b;
-    private int c;*/
-
-    public Ülesanne() {
-    }
-
 
     public Ülesanne(int ülempiir) {
         this.ülempiir = ülempiir;
-
     }
 
     public int getÜlempiir() {
@@ -29,6 +20,6 @@ abstract class Ülesanne {
 
     @Override
     public String toString() {
-        return getÜlesanne().toString();
+        return getÜlesanne();
     }
 }
