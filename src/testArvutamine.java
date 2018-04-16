@@ -58,19 +58,7 @@ public class testArvutamine {
 
     }
 
-    //meetodid
-
 }
 
-    //ajalimiidiga harjutuskorra loomine
-
-    //ülesannete limiidiga harjutuskorra loomine
-
-    //ülesande tekitamine
-
-    //ülesande esitamine kasutajale ja kasutaja vastuse registreerimine
-    // esimese ülesande esitamisega koos tuleb ka stopper käima panna
-    //ajalimiidiga harjutuskorra puhul tuleks näidata ka allesjäänud aega, teatud regulaarsusega
-    // ülesannete limiidi korral viimase ülesande lahendamisega koos tuleb ka stopper seisma panna või siis ajalimiidi korral tule
 
 

@@ -1,4 +1,6 @@
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -23,7 +25,7 @@ public class Sessioon {
     public Sessioon() throws FileNotFoundException, UnsupportedEncodingException {
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(dateFormat.format(date) + "; " + kasutajaNimi); //
+        stringBuilder.append("Sessiooni algus = " + dateFormat.format(date) + " ; Kasutaja nimi = " + kasutajaNimi + " "); //
         sessiooniID = stringBuilder.toString();
         boolean harjutama = true;
 
@@ -98,7 +100,8 @@ public class Sessioon {
 
 
             //kirjutame harjutuskorra andmed logifaili
-            h1.kirjutaHarjutuskordFaili();
+            //h1.kirjutaHarjutuskordFaili();//proovin selle eemaldada, et fail oleks informatiivsem ja sisaldaks igal real ka sessiooni infot, et saaks teha isikustatud statistikat
+            this.kirjutaSessioonFaili();
             System.out.println(h1.toString());
             System.out.println("---------------------------------------------------");
             System.out.println();
@@ -267,7 +270,7 @@ public class Sessioon {
         for (int i = 0; i < harjutuskordList.size(); i++) {
             index = i + 1;
 
-            s += "\n" + "h" + index + " " + harjustuskorraKellaaeg.get(i) + " " + harjutuskordList.get(i);
+            s += "\n" + getSessiooniID() + ";" + " Harjutuskord = " + index + " ; " + harjustuskorraKellaaeg.get(i) + " ; " + harjutuskordList.get(i);
         }
         return s;
     }
@@ -332,6 +335,35 @@ public class Sessioon {
 
     @Override
     public String toString() {
-        return "Sessioon: " + getSessiooniID() + " " + annaHarjutused();
+        return annaHarjutused();
+        //return "Sessioon: " + getSessiooniID() + " " + annaHarjutused();
+    }
+
+    //kirjuta sessiooni andmed faili koos kasutaja andmete ja ajaga
+    public void kirjutaSessioonFaili () throws FileNotFoundException, UnsupportedEncodingException {
+
+        //luuakse faili isend
+        String failinimi = "harjutuskorrad.txt";
+        java.io.File fail = new java.io.File(failinimi);
+
+        //kontrollitakse, kas fail on failisüsteemis olemas ja kui ei ole, siis luuakse. TODO: Vaja testida, kas ikka jääb salvestamata, kui harjutuskordade faili ei ole. Pigem luuakse uus fail
+        if (!fail.exists()) {
+            System.out.println("Faili " + failinimi + " ei ole programmi failiga samas kaustas olemas ja seetõttu ei saa harjutuskorra tulemusi salvestada.");
+            java.io.PrintWriter pw = new java.io.PrintWriter(fail, "UTF-8");
+            pw.close();
+        }
+
+        //kirjutatakse andmed faili
+        try
+        {
+            FileWriter fw = new FileWriter(failinimi,true); // true tähendab, et andmeid lisatakse faili juurde, mitte ei kirjutata olemasolevaid üle
+            fw.write(this.toString() + "\n");//lisab harjutuskorra kohta andmed stringina faili
+            fw.close();
+        }
+        catch(IOException ioe)
+        {
+            System.err.println("IOException: " + ioe.getMessage());// kui tekib, viga siis näidatakse kasutajale veateadet
+        }
+
     }
 }

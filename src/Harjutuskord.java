@@ -120,24 +120,24 @@ public class Harjutuskord {
         if (kasAjaPeale) { return
                 //" Ajalimiit = " + ajalimiit +" min" +
                         " Ajalimiit(min) = " + limiit +
-                "; tehete valik = '" + teheteValik + '\'' +
-                "; lahendatud ülesandeid = " + lahendatudYlesandeid +
-                "; lahendamise aeg sekundites = " + lahendamiseAeg +
-                "; õigeid vastuseid = " + oigeidVastuseid +
-                "; raskusaste = " + raskusAste ;}
+                " ; tehete valik = '" + teheteValik + '\'' +
+                " ; lahendatud ülesandeid = " + lahendatudYlesandeid +
+                " ; lahendamise aeg sekundites = " + lahendamiseAeg +
+                " ; õigeid vastuseid = " + oigeidVastuseid +
+                " ; raskusaste = " + raskusAste ;}
                 else {
                     return
                     //"Ülesannete limiit=" + ylesanneteLimiit +
-                            "Ülesannete limiit=" + limiit +
-                    "; tehete valik = '" + teheteValik + '\'' +
-                    "; lahendatud ülesandeid = " + lahendatudYlesandeid +
-                    "; lahendamise aeg sekundites = " + lahendamiseAeg +
-                    "; õigeid vastuseid = " + oigeidVastuseid +
-                            "; raskusaste = " + raskusAste ; }
+                            " Ülesannete limiit = " + limiit +
+                    " ; tehete valik = '" + teheteValik + '\'' +
+                    " ; lahendatud ülesandeid = " + lahendatudYlesandeid +
+                    " ; lahendamise aeg sekundites = " + lahendamiseAeg +
+                    " ; õigeid vastuseid = " + oigeidVastuseid +
+                            " ; raskusaste = " + raskusAste ; }
 
         }
 
-    //kirjuta harjutuskorra andmed faili koos kasutaja andmete ja ajaga
+    //kirjuta harjutuskorra andmed faili
     public void kirjutaHarjutuskordFaili () throws FileNotFoundException, UnsupportedEncodingException {
 
         //luuakse faili isend
