@@ -165,7 +165,7 @@ public class Sessioon {
             try {
                 s=scan.nextLine();
                 if(s.equals("x")){System.exit(0);}
-                vastus = Integer.parseInt(scan.nextLine()); // kas vastus on int ?
+                vastus = Integer.parseInt(s); // kas vastus on int ?
                 //System.out.println("Oli täisarv");
                 break;
             } catch (NumberFormatException e) { // vastus polnud int
