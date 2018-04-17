@@ -7,7 +7,7 @@ public class Lahutamine extends Ülesanne {
     public Lahutamine(int ülempiir) {
         super(ülempiir);
 
-        System.out.println(ülempiir * 0.1);
+
         boolean sobib = true;
         while (sobib) {
             a = (int) Math.round(Math.random() * (ülempiir - 1) + 1);
